@@ -1,45 +1,62 @@
 import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { Box } from '../../styles';
-import { Icon } from '../Icons';
+import { useState } from 'react';
 
-export const menuData = [
+const menuItems = [
   {
-    label: 'o mnie',
-    icon: 'avatar',
-    iconSize: '24px',
-    url: '/',
+    label: 'Nasza misja',
+    slug: 'Jakie są nasze cele, gdzie zmierzamy.',
   },
   {
-    label: 'CV',
-    icon: 'document',
-    iconSize: '20px',
-    url: '/resume',
+    label: 'Dzika szkoła',
+    slug: 'Dlaczego to miejsce jest takie wyjątkowe',
   },
   {
-    label: 'kontakt',
-    icon: 'email',
-    iconSize: '26px',
-    url: '/contact',
+    label: 'Fundacja',
+    slug: 'Nasz statut, projekty i plany.',
+  },
+  {
+    label: 'Kontakt',
+    slug: 'Gdzie możesz nasz znaleźć, jak z nami porozmawiać.',
   },
 ];
 
 const Menu = () => {
+  const [activeSlug, setActiveSlug] = useState(
+    'Witamy na stronie fundacji dzika',
+  );
+
   return (
-    <MenuWrapper borderRadius="border5" mt="-290px" mr="space10">
-      <MenuList>
-        {menuData.map(({ label, icon, iconSize, url }) => (
-          <MenuItem key={url}>
-            <Link href={url}>
-              <LinkContainer>
-                <Icon iconName={icon} size={iconSize} />
-                <br />
-                {label}
-              </LinkContainer>
-            </Link>
-          </MenuItem>
+    <MenuWrapper>
+      <MenuSlug>{activeSlug}</MenuSlug>
+      <ButtonsWrapper>
+        {menuItems.map(({ label, slug }) => (
+          <ButtonItem
+            key={label}
+            onMouseEnter={() => setActiveSlug(slug)}
+            onMouseLeave={() =>
+              setActiveSlug('Witamy na stronie fundacji dzika')
+            }
+          >
+            {label}
+          </ButtonItem>
         ))}
-      </MenuList>
+        <Box pl="10px">
+          <FacebookButton>
+            <svg viewBox="0 0 36 36" fill="currentColor" height="40" width="40">
+              <path
+                fill="#2566ff"
+                d="M20.181 35.87C29.094 34.791 36 27.202 36 18c0-9.941-8.059-18-18-18S0 8.059 0 18c0 8.442 5.811 15.526 13.652 17.471L14 34h5.5l.681 1.87Z"
+              />
+              <path
+                fill="#ffffff"
+                d="M13.651 35.471v-11.97H9.936V18h3.715v-2.37c0-6.127 2.772-8.964 8.784-8.964 1.138 0 3.103.223 3.91.446v4.983c-.425-.043-1.167-.065-2.081-.065-2.952 0-4.09 1.116-4.09 4.025V18h5.883l-1.008 5.5h-4.867v12.37a18.183 18.183 0 0 1-6.53-.399Z"
+              />
+            </svg>
+          </FacebookButton>
+        </Box>
+      </ButtonsWrapper>
     </MenuWrapper>
   );
 };
@@ -47,55 +64,40 @@ const Menu = () => {
 export default Menu;
 
 const MenuWrapper = styled(Box)`
-  position: relative;
-  background-color: #fff;
-  z-index: 10;
+  margin: auto;
+  max-width: 1024px;
 `;
 
-const MenuList = styled(Box)`
-  position: relative;
-  list-style: none;
-  margin: 0;
-`;
-
-const MenuItem = styled(Box)`
-  position: relative;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 600;
-  margin: 0;
-  a {
-    text-decoration: none;
-  }
-  ::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: radial-gradient(
-      ellipse at right,
-      #ddd 0%,
-      rgba(255, 255, 255, 0) 70%
-    );
-  }
-
-  :nth-child(3)::before {
-    height: 0;
-  }
-`;
-
-const LinkContainer = styled(Box)`
+const ButtonsWrapper = styled(Box)`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 20px 10px;
-  font-size: 12px;
-  color: #333;
+  margin-top: -50px;
+  margin-bottom: 50px;
+`;
+
+const ButtonItem = styled(Box)`
+  padding: 10px 20px;
+  margin: 0 10px 0 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #666;
+  font-weight: 400;
+  border-radius: 5px;
   transition: 0.2s;
   :hover {
-    color: ${({ theme: { colors } }) => colors.secondary};
+    color: darkgreen;
   }
+`;
+
+const MenuSlug = styled(Box)`
+  margin-top: -60px;
+  margin-bottom: 60px;
+  padding-left: 10px;
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #666;
+`;
+
+const FacebookButton = styled(Box)`
+  cursor: pointer;
 `;

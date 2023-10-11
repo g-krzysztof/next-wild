@@ -2,8 +2,8 @@ import breakpoints from './breakpoints';
 
 export const theme = {
   colors: {
-    primary: '#50a3a2',
-    secondary: '#78CC6D',
+    primary: '#f8f8f8',
+    secondary: '#a1bdbc',
     background: '#a1bdbc',
     backgroundLight: '#eef9ee',
     white100: '#ffffff',
