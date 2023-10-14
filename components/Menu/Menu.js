@@ -6,7 +6,7 @@ import { useState } from 'react';
 const menuItems = [
   {
     label: 'Nasza misja',
-    slug: 'Jakie są nasze cele, gdzie zmierzamy.',
+    slug: 'Jakie są nasze cele, gdzie zmierzamy',
   },
   {
     label: 'Dzika szkoła',
@@ -14,11 +14,11 @@ const menuItems = [
   },
   {
     label: 'Fundacja',
-    slug: 'Nasz statut, projekty i plany.',
+    slug: 'Nasz statut, projekty i plany',
   },
   {
     label: 'Kontakt',
-    slug: 'Gdzie możesz nasz znaleźć, jak z nami porozmawiać.',
+    slug: 'Gdzie możesz nasz znaleźć, jak z nami porozmawiać',
   },
 ];
 
@@ -29,7 +29,6 @@ const Menu = () => {
 
   return (
     <MenuWrapper>
-      <MenuSlug>{activeSlug}</MenuSlug>
       <ButtonsWrapper>
         {menuItems.map(({ label, slug }) => (
           <ButtonItem
@@ -43,7 +42,12 @@ const Menu = () => {
           </ButtonItem>
         ))}
         <Box pl="10px">
-          <FacebookButton>
+          <FacebookButton
+            onMouseEnter={() => setActiveSlug('Odwiedź naszą stronę na Facebooku')}
+            onMouseLeave={() =>
+              setActiveSlug('Witamy na stronie fundacji dzika')
+            }
+          >
             <svg viewBox="0 0 36 36" fill="currentColor" height="40" width="40">
               <path
                 fill="#2566ff"
@@ -57,6 +61,7 @@ const Menu = () => {
           </FacebookButton>
         </Box>
       </ButtonsWrapper>
+      <MenuSlug>{activeSlug}</MenuSlug>
     </MenuWrapper>
   );
 };
@@ -70,32 +75,36 @@ const MenuWrapper = styled(Box)`
 
 const ButtonsWrapper = styled(Box)`
   display: flex;
-  margin-top: -50px;
-  margin-bottom: 50px;
+  margin-top: -70px;
+  margin-bottom: 70px;
 `;
 
 const ButtonItem = styled(Box)`
   padding: 10px 20px;
   margin: 0 10px 0 0;
   cursor: pointer;
-  background-color: transparent;
-  border: 1px solid #fff;
+  background-color: white;
+  box-shadow: 4px 4px 25px -9px rgba(66, 68, 90, 0.7);
   color: #666;
   font-weight: 400;
   border-radius: 5px;
   transition: 0.2s;
+  display: flex;
+  align-items: center;
   :hover {
     color: darkgreen;
   }
 `;
 
 const MenuSlug = styled(Box)`
-  margin-top: -60px;
-  margin-bottom: 60px;
+  margin-top: -45px;
+  margin-bottom: 25px;
   padding-left: 10px;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: bold;
   text-transform: uppercase;
-  color: #666;
+  color: white;
+  text-shadow: 2px 2px 6px rgba(66, 68, 90, 1);
 `;
 
 const FacebookButton = styled(Box)`

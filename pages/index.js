@@ -12,11 +12,15 @@ const Home = ({ data, header }) => {
     <>
       <Header data={header.data} />
       <Content blocks={blocks} />
-      <Footer color="#666">
-        Nasze projekty i inicjatywy:{' '}
-        <Box pl="10px">
-          <a href="/">KoBaE</a>
-        </Box>
+      <Footer color="#333">
+        <FooterContent>
+          <Box display="flex" p="5px">
+            Nasze projekty i inicjatywy:{' '}
+            <Box pl="10px">
+              <a href="/">KoBaE</a>
+            </Box>
+          </Box>
+        </FooterContent>
       </Footer>
       <Background />
     </>
@@ -26,15 +30,26 @@ const Home = ({ data, header }) => {
 export default Home;
 
 const Footer = styled(Box)`
-  width: 1440px;
-  margin: 30px auto 0 auto;
-  padding: 10px 0 0 10px;
+  padding: 30px 30px;
   display: flex;
   justify-content: flex-end;
   border-top: 1px solid #444;
-  font-size: 11px;
+  font-size: 13px;
+  font-weight: bold;
   text-transform: uppercase;
+  background-image: url("/images/yellow_no_pattern.jpg");
+  background-size: cover;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 `;
+
+const FooterContent = styled(Box)`
+  width: 1440px;
+  margin: 0 auto;
+  display: flex;
+`
 
 export const getStaticProps = async () => {
   let data;

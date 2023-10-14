@@ -7,7 +7,7 @@ const getContentPartByBlockType = (blockType, data) => {
   switch (blockType) {
     case 'paragraph':
       return (
-        <Box py="space05" width="55%">
+        <Box py="space05" width="100%">
           <Paragraph>
             <Markdown>{data.text.replaceAll('class', 'className')}</Markdown>
           </Paragraph>
@@ -26,7 +26,7 @@ const getContentPartByBlockType = (blockType, data) => {
     case 'image':
       return (
         <StyledImage>
-          <img width="40%" src={data.file.url} />
+          <img src={data.file.url} />
         </StyledImage>
       );
     case 'list':
@@ -49,20 +49,20 @@ const Content = ({ blocks }) => {
 export default Content;
 
 const StyledImage = styled(Box)`
-  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
   img {
-    width: 40%;
-    position: absolute;
-    right: -180px;
-    top: 0;
+    width: 100%;
   }
 `;
 
 const ContentWrapper = styled(Box)`
   position: relative;
-  margin: 20px auto;
+  margin: 0px auto;
   padding: 20px;
   background-color: #fff;
   max-width: 1024px;
   border-radius: 5px;
+  //box-shadow: 4px 4px 25px -9px rgba(66, 68, 90, 0.7);
 `;

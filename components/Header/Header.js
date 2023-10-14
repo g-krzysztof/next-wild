@@ -10,7 +10,7 @@ const Header = ({ data }) => {
     <>
       <HeaderWrapper>
         <ContentWrapper>
-          <Box display="flex">
+          <Box display="flex" justifyContent="space-between">
             <Box m="-30px 0 -100px 0">
               <img
                 style={{ borderRadius: '50%' }}
@@ -35,12 +35,6 @@ const Header = ({ data }) => {
         </SlugText>
       </ContentWrapper>
       <Menu />
-
-      {/*<div className="noisy" style={{*/}
-      {/*  width: "300px",*/}
-      {/*  height: "300px",*/}
-      {/*  backgroundColor: "yellowgreen"*/}
-      {/*}}>test</div>*/}
     </>
   );
 };
@@ -52,6 +46,8 @@ const HeaderWrapper = styled(Box)`
   margin: auto;
   padding: 20px;
   background-color: #fff;
+
+  box-shadow: 4px 4px 25px -9px rgba(66, 68, 90, 0.7);
 `;
 
 const ContentWrapper = styled(Box)`

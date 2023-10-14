@@ -4,7 +4,7 @@ import { Box } from './Box';
 export const Background = () => {
   return (
     <Box backgroundColor="white">
-      <StyledBackground className="noisy" />
+      <StyledBackground />
       <GradientBackground />
     </Box>
   );
@@ -19,6 +19,7 @@ const StyledBackground = styled.div`
   left: 0;
   z-index: -3;
   background-color: #f8f8f8;
+  background-image: url("/images/green_landscape.jpg");
 `;
 
 const GradientBackground = styled.div`
@@ -32,6 +33,6 @@ const GradientBackground = styled.div`
   background: linear-gradient(
     0deg,
     rgba(255, 255, 255, 1),
-    rgba(255, 255, 255, 0.3)
+    rgba(255, 255, 255, 0)
   );
 `;
