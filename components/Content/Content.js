@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { Box } from '../../styles';
 import Markdown from 'markdown-to-jsx';
 import { Paragraph, Delimiter } from './ContentParts';
+import useBetterMediaQuery from '../../hooks/useBetterMediaQuery'
 
 const getContentPartByBlockType = (blockType, data) => {
   switch (blockType) {
@@ -37,8 +38,11 @@ const getContentPartByBlockType = (blockType, data) => {
 };
 
 const Content = ({ blocks }) => {
+
+  const isMobile = useBetterMediaQuery('(max-width: 1024px)');
+
   return (
-    <ContentWrapper>
+    <ContentWrapper isMobile={isMobile}>
       {blocks.map(({ id, type, data }) => (
         <Box key={id}>{getContentPartByBlockType(type, data)}</Box>
       ))}
@@ -59,10 +63,9 @@ const StyledImage = styled(Box)`
 
 const ContentWrapper = styled(Box)`
   position: relative;
-  margin: 0px auto;
+  margin: 0 auto;
   padding: 20px;
   background-color: #fff;
   max-width: 1024px;
-  border-radius: 5px;
-  //box-shadow: 4px 4px 25px -9px rgba(66, 68, 90, 0.7);
+  border-radius: ${({ isMobile }) => isMobile ? 0 : 5}px;
 `;

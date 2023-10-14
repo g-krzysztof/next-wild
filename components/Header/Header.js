@@ -2,9 +2,13 @@ import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { Box } from '../../styles';
 import { Menu } from '../Menu';
+import useBetterMediaQuery from '../../hooks/useBetterMediaQuery'
 
 const Header = ({ data }) => {
   const { callToAction, logo } = data.attributes;
+
+  const isMobile = useBetterMediaQuery('(max-width: 1024px)');
+  const isTablet = useBetterMediaQuery('(max-width: 1380px)');
 
   return (
     <>
@@ -14,27 +18,26 @@ const Header = ({ data }) => {
             <Box m="-30px 0 -100px 0">
               <img
                 style={{ borderRadius: '50%' }}
-                height="150px"
+                height={isMobile ? '100px' : '150px'}
                 src={logo.image.data.attributes.formats.small.url}
               />
             </Box>
-            <LogoTitle>
+            <LogoTitle pl={isMobile ? '1px' : '50px'} fontSize={isMobile ? '12px' : '16px'} isMobile={isMobile}>
               Wolna Szkoła Dzika -&nbsp;
               <strong>Szkoła Demokratyczna w Tychach</strong>
             </LogoTitle>
-            {/*  {callToAction}*/}
           </Box>
         </ContentWrapper>
       </HeaderWrapper>
-      <ContentWrapper>
+      {!isMobile && <ContentWrapper>
         <SlugText>
           <strong>{callToAction} · Organizacja społeczna</strong>
           ul. Jaroszowicka 100, 43-100 Tychy
           <br />
           663 211 208 · szkoladzika@gmail.com
         </SlugText>
-      </ContentWrapper>
-      <Menu />
+      </ContentWrapper>}
+      {<Box pl={(isTablet && !isMobile) ? '200px' : '0'}><Menu /></Box>}
     </>
   );
 };
@@ -57,8 +60,8 @@ const ContentWrapper = styled(Box)`
 
 const LogoTitle = styled(Box)`
   display: flex;
+  flex-direction: ${({ isMobile }) => isMobile ? 'column' : 'row'};
   align-items: center;
-  padding-left: 50px;
 `;
 
 const SlugText = styled(Box)`

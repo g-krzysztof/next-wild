@@ -39,7 +39,7 @@ const Footer = styled(Box)`
   text-transform: uppercase;
   background-image: url("/images/yellow_no_pattern.jpg");
   background-size: cover;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;

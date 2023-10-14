@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 import Link from 'next/link';
 import { Box } from '../../styles';
 import { useState } from 'react';
+import useBetterMediaQuery from '../../hooks/useBetterMediaQuery'
 
 const menuItems = [
   {
@@ -27,9 +28,13 @@ const Menu = () => {
     'Witamy na stronie fundacji dzika',
   );
 
+  const isMobile = useBetterMediaQuery('(max-width: 1024px)');
+  const smallPaddingMenu = useBetterMediaQuery('(max-width: 1124px)');
+  const isTablet = useBetterMediaQuery('(max-width: 1444px)');
+
   return (
     <MenuWrapper>
-      <ButtonsWrapper>
+      <ButtonsWrapper isMobile={isMobile} isTablet={isTablet}>
         {menuItems.map(({ label, slug }) => (
           <ButtonItem
             key={label}
@@ -37,12 +42,14 @@ const Menu = () => {
             onMouseLeave={() =>
               setActiveSlug('Witamy na stronie fundacji dzika')
             }
+            isMobile={isMobile}
+            smallPaddingMenu={smallPaddingMenu}
           >
             {label}
           </ButtonItem>
         ))}
-        <Box pl="10px">
-          <FacebookButton
+        <Box pl={isMobile ? '0px' : '10px'}>
+          {!isMobile && <FacebookButton
             onMouseEnter={() => setActiveSlug('Odwiedź naszą stronę na Facebooku')}
             onMouseLeave={() =>
               setActiveSlug('Witamy na stronie fundacji dzika')
@@ -58,10 +65,10 @@ const Menu = () => {
                 d="M13.651 35.471v-11.97H9.936V18h3.715v-2.37c0-6.127 2.772-8.964 8.784-8.964 1.138 0 3.103.223 3.91.446v4.983c-.425-.043-1.167-.065-2.081-.065-2.952 0-4.09 1.116-4.09 4.025V18h5.883l-1.008 5.5h-4.867v12.37a18.183 18.183 0 0 1-6.53-.399Z"
               />
             </svg>
-          </FacebookButton>
+          </FacebookButton>}
         </Box>
       </ButtonsWrapper>
-      <MenuSlug>{activeSlug}</MenuSlug>
+      {!isMobile && <MenuSlug>{activeSlug}</MenuSlug>}
     </MenuWrapper>
   );
 };
@@ -75,22 +82,24 @@ const MenuWrapper = styled(Box)`
 
 const ButtonsWrapper = styled(Box)`
   display: flex;
-  margin-top: -70px;
-  margin-bottom: 70px;
+  flex-direction: ${({ isMobile }) => isMobile ? 'column' : 'row'};
+  margin-top: ${({ isMobile }) => isMobile ? '0px' : '-70px'};
+  margin-bottom: ${({ isMobile }) => isMobile ? '0px' : '70px'};
 `;
 
 const ButtonItem = styled(Box)`
-  padding: 10px 20px;
-  margin: 0 10px 0 0;
+  padding: ${({ smallPaddingMenu }) => smallPaddingMenu ? '10px 10px' : '10px 20px'};
+  margin: ${({ isMobile }) => isMobile ? '0' : '0 10px 0 0'};
   cursor: pointer;
-  background-color: white;
+  background-color: ${({ isMobile }) => isMobile ? 'rgba(255, 255, 255, 0.05)' : 'white'};
   box-shadow: 4px 4px 25px -9px rgba(66, 68, 90, 0.7);
-  color: #666;
+  color: ${({ isMobile }) => isMobile ? 'black' : '#666'};
   font-weight: 400;
-  border-radius: 5px;
+  border-radius: ${({ isMobile }) => isMobile ? '0' : '5px'};
   transition: 0.2s;
   display: flex;
-  align-items: center;
+  align-items: ${({ isMobile }) => isMobile ? 'flex-end' : 'center'};
+  justify-content: ${({ isMobile }) => isMobile ? 'flex-end' : 'center'};
   :hover {
     color: darkgreen;
   }
