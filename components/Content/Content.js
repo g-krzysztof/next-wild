@@ -7,7 +7,7 @@ const getContentPartByBlockType = (blockType, data) => {
   switch (blockType) {
     case 'paragraph':
       return (
-        <Box py="space05" width="100%">
+        <Box pt="space05" pb="space20" width="100%">
           <Paragraph>
             <Markdown>{data.text.replaceAll('class', 'className')}</Markdown>
           </Paragraph>
@@ -17,7 +17,7 @@ const getContentPartByBlockType = (blockType, data) => {
       return <Delimiter />;
     case 'header':
       return (
-        <Box py="space10">
+        <Box pt="space10" pb="space10">
           <h4>
             <Markdown>{data.text}</Markdown>
           </h4>
@@ -51,7 +51,7 @@ export default Content;
 const StyledImage = styled(Box)`
   display: flex;
   justify-content: center;
-  margin: 10px 0;
+  margin: 20px 0;
   img {
     width: 100%;
   }
