@@ -25,7 +25,7 @@ const Home = ({ data, header }) => {
 
   const modelData = serviceToModelData(data)
 
-  const { blocks } = getObjectBySlug(modelData, 'home').content;
+  const { blocks } = getObjectBySlug(modelData, 'fundacja').content;
 
   return (
     <>

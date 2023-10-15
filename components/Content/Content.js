@@ -63,7 +63,7 @@ const StyledImage = styled(Box)`
 
 const ContentWrapper = styled(Box)`
   position: relative;
-  margin: 0 auto;
+  margin: 0 auto 100px auto;
   padding: 20px;
   background-color: #fff;
   max-width: 1024px;

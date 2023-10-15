@@ -8,18 +8,22 @@ const menuItems = [
   {
     label: 'Nasza misja',
     slug: 'Jakie są nasze cele, gdzie zmierzamy',
+    href: '/'
   },
   {
     label: 'Dzika szkoła',
     slug: 'Dlaczego to miejsce jest takie wyjątkowe',
+    href: '/dzika'
   },
   {
     label: 'Fundacja',
     slug: 'Nasz statut, projekty i plany',
+    href: '/fundacja'
   },
   {
     label: 'Kontakt',
     slug: 'Gdzie możesz nasz znaleźć, jak z nami porozmawiać',
+    href: '/kontakt'
   },
 ];
 
@@ -35,7 +39,7 @@ const Menu = () => {
   return (
     <MenuWrapper>
       <ButtonsWrapper isMobile={isMobile} isTablet={isTablet}>
-        {menuItems.map(({ label, slug }) => (
+        {menuItems.map(({ label, slug, href }) => (
           <ButtonItem
             key={label}
             onMouseEnter={() => setActiveSlug(slug)}
@@ -45,7 +49,7 @@ const Menu = () => {
             isMobile={isMobile}
             smallPaddingMenu={smallPaddingMenu}
           >
-            {label}
+            <Link href={href}>{label}</Link>
           </ButtonItem>
         ))}
         <Box pl={isMobile ? '0px' : '10px'}>
@@ -100,8 +104,12 @@ const ButtonItem = styled(Box)`
   display: flex;
   align-items: ${({ isMobile }) => isMobile ? 'flex-end' : 'center'};
   justify-content: ${({ isMobile }) => isMobile ? 'flex-end' : 'center'};
-  :hover {
-    color: darkgreen;
+  a {
+    text-decoration: none;
+    color: #222;
+    :hover {
+      color: darkgreen;
+    }
   }
 `;
 
